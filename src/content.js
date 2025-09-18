@@ -48,4 +48,7 @@ const observer = new MutationObserver((mutations) => {
 
 // ドキュメントの変更を監視
 const observeSelector = ".ContainerUndo_undoInSM__1vdc1";  // できるだけ監視対象を絞る
-observer.observe(document.querySelector(observeSelector), { childList: true, subtree: true });
+const observeTarget = document.querySelector(observeSelector);
+if (observeTarget) {
+  observer.observe(observeTarget, { childList: true, subtree: true });
+}
