@@ -1,5 +1,7 @@
-// ボタンを追加するターゲット要素のセレクタ
-const targetSelector = '.ThreadEditor_buttons__Y_Bk5';
+function handleClick() {
+  const newScrapUrl = 'https://zenn.dev/scraps/new'; // 新規Scrap作成ページのURL
+  window.open(newScrapUrl, '_blank');
+}
 
 // ボタン生成＆追加処理を関数化
 function addButtonToTarget(target) {
@@ -16,13 +18,12 @@ function addButtonToTarget(target) {
   const buttonText = '新規Scrap作成';
   button.textContent = buttonText;
   button.classList.add(...buttonClasses, 'scrap-create-btn');
-  button.addEventListener('click', () => {
-    alert('ボタンがクリックされました');
-  });
+  button.addEventListener('click', handleClick);
   target.appendChild(button);
 }
 
 // 初期表示分
+const targetSelector = '.ThreadEditor_buttons__Y_Bk5';  // ボタンを追加するターゲット要素のセレクタ
 document.querySelectorAll(targetSelector).forEach(addButtonToTarget);
 
 // 変更を監視して、ターゲット要素が追加されたらボタンを追加する
