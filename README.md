@@ -1,0 +1,2 @@
+# Zenn Easy Scrap
+Scrap編集画面から簡単に新たなScrapを作成できるChrome拡張機能です
