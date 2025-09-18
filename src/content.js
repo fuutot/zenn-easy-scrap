@@ -23,6 +23,29 @@ if (targets.length > 0) {
     });
     target.appendChild(button);
   });
-} else {
-  console.log(`ターゲット要素が見つかりません: ${targetSelector}`);
-}
+};
+
+// 変更を監視して、ターゲット要素が追加されたらボタンを追加する
+const observer = new MutationObserver((mutations) => {
+  mutations.forEach(mutation => {
+    mutation.addedNodes.forEach(node => {
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        const newTargets = node.querySelectorAll(targetSelector);
+        newTargets.forEach(target => {
+          // 要素ごとにボタンを作成して追加
+          const button = document.createElement('button');
+          button.textContent = buttonText;
+          button.classList.add(...buttonClasses);
+          button.addEventListener('click', () => {
+            alert('ボタンがクリックされました');
+          });
+          target.appendChild(button);
+        });
+      }
+    });
+  });
+});
+
+// ドキュメントの変更を監視
+const observeSelector = ".ContainerUndo_undoInSM__1vdc1";  // できるだけ監視対象を絞る
+observer.observe(document.querySelector(observeSelector), { childList: true, subtree: true });
