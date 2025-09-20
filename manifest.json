@@ -5,7 +5,7 @@
 	"description": "ZennのScrap編集画面から新規Scrapを簡単に作成できる拡張機能",
 		"icons": {
 			"16": "images/icon16.png",
-            "32": "images/icon32.png",
+			"32": "images/icon32.png",
 			"48": "images/icon48.png",
 			"128": "images/icon128.png"
 		},
