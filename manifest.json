@@ -18,10 +18,10 @@
 			},
 			"default_title": "Zenn Easy Scrap"
 		},
-        "content_scripts": [
-            {
-                "matches": ["https://zenn.dev/*/scraps/*"],
-                "js": ["src/content.js"]
-            }
-        ]
+		"content_scripts": [
+			{
+				"matches": ["https://zenn.dev/*/scraps/*"],
+				"js": ["src/content.js"]
+			}
+		]
 }
