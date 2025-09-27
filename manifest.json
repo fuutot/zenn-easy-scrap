@@ -24,7 +24,10 @@
 	"content_scripts": [
 		{
 			"matches": ["https://zenn.dev/*/scraps/*"],
-			"js": ["src/content.js"]
+			"js": [
+				"src/content.js",
+				"src/content_child.js"
+			]
 		}
 	],
 	"permissions": [
