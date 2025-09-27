@@ -1,4 +1,16 @@
 function handleClick() {
+  // 親のScrap記事のURLを保存
+  const parentUrl = window.location.href;
+
+  // background.jsにメッセージを送信
+  chrome.runtime.sendMessage(
+    {
+      action: 'saveParentUrl',
+      target: 'background',
+      url: parentUrl
+    }
+  );
+
   const newScrapUrl = 'https://zenn.dev/scraps/new'; // 新規Scrap作成ページのURL
   window.open(newScrapUrl, '_blank');
 }
