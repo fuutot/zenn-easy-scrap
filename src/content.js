@@ -2,17 +2,20 @@ function handleClick() {
   // 親のScrap記事のURLを保存
   const parentUrl = window.location.href;
 
-  // background.jsにメッセージを送信
+  // background.jsにメッセージを送信（新しいタブ作成を依頼）
   chrome.runtime.sendMessage(
     {
-      action: 'saveParentUrl',
+      action: 'createNewScrapTab',
       target: 'background',
-      url: parentUrl
+      parentUrl: parentUrl
+    },
+    (response) => {
+      if (response && response.tabId) {
+        console.log('新しいタブが作成されました。タブID:', response.tabId);
+        // 必要に応じて、タブIDを使った追加処理をここに記述
+      }
     }
   );
-
-  const newScrapUrl = 'https://zenn.dev/scraps/new'; // 新規Scrap作成ページのURL
-  window.open(newScrapUrl, '_blank');
 }
 
 // ボタン生成＆追加処理を関数化
