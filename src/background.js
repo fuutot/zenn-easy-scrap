@@ -10,8 +10,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             // レスポンスとしてタブIDを返す
             sendResponse({ tabId: tab.id, success: true });
             
-            // 親URLとタブIDの関連付けを保存する処理をここに追加
-            // 例: chrome.storage.local.set({ [tab.id]: message.parentUrl });
+            // 親URLとタブIDの関連付けを保存
+            chrome.storage.session.set(
+                {
+                    'tabID': tab.id.toString(),
+                    'parentURL': message.parentUrl
+                }).then(() => {
+                    console.log('Parent URL saved for tab ID:', tab.id);
+                });
         });
         
         // 非同期レスポンスを使用することを示す
