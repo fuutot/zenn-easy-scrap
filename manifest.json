@@ -26,7 +26,8 @@
 			"matches": ["https://zenn.dev/*/scraps/*"],
 			"js": [
 				"src/content.js",
-				"src/content_child.js"
+				"src/content_child.js",
+				"src/content_parent.js"
 			]
 		}
 	],
