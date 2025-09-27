@@ -25,7 +25,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             chrome.storage.session.get(currentTabId).then((result) => {
                 if (result && result[currentTabId]) {
                     // タブ情報が存在する場合、レスポンスとして返す
-                    sendResponse({ exists: true, info: result[currentTabId] });
+                    currentTabInfo = result[currentTabId];
+                    currentTabInfo.url = sender.tab.url;
+                    chrome.storage.session.set({[currentTabId]: currentTabInfo}).then(() => {
+                        console.log('現在のタブのURL情報が更新されました');
+                    });
+                    sendResponse({ exists: true, info: currentTabInfo });
                 } else {
                     // タブ情報が存在しない場合
                     sendResponse({ exists: false });
