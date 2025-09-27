@@ -18,4 +18,20 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         // 非同期レスポンスを使用することを示す
         return true;
     }
+    else if (message.action === 'getCurrentTabInfo' && message.target === 'background') {
+        // 現在のタブIDを取得
+        if (sender.tab && sender.tab.id) {
+            const currentTabId = sender.tab.id.toString();
+            chrome.storage.session.get(currentTabId).then((result) => {
+                if (result && result[currentTabId]) {
+                    // タブ情報が存在する場合、レスポンスとして返す
+                    sendResponse({ exists: true, info: result[currentTabId] });
+                } else {
+                    // タブ情報が存在しない場合
+                    sendResponse({ exists: false });
+                }
+            });
+        }
+        return true;
+    }
 });
