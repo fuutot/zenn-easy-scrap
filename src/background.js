@@ -1,7 +1,5 @@
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === 'createNewScrapTab' && message.target === 'background') {
-        console.log('Parent URL to save:', message.parentUrl);
-        
         // 新しいタブを作成
         const newScrapUrl = 'https://zenn.dev/scraps/new';
         chrome.tabs.create({ url: newScrapUrl }, (tab) => {
@@ -11,13 +9,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             sendResponse({ tabId: tab.id, success: true });
             
             // 親URLとタブIDの関連付けを保存
-            chrome.storage.session.set(
-                {
-                    'tabID': tab.id.toString(),
-                    'parentURL': message.parentUrl
-                }).then(() => {
-                    console.log('Parent URL saved for tab ID:', tab.id);
-                });
+            childTabId = tab.id.toString();
+            chrome.storage.session.set({[childTabId]: {'url': null, 'parentTabId': sender.tab.id.toString()}}).then(() => {
+                console.log('新しいタブの情報が保存されました');
+            });
         });
         
         // 非同期レスポンスを使用することを示す

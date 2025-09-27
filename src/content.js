@@ -1,18 +1,10 @@
 function handleClick() {
-  // 親のScrap記事のURLを保存
-  const parentUrl = window.location.href;
-
   // background.jsにメッセージを送信（新しいタブ作成を依頼）
   chrome.runtime.sendMessage(
-    {
-      action: 'createNewScrapTab',
-      target: 'background',
-      parentUrl: parentUrl
-    },
+    {action: 'createNewScrapTab', target: 'background'},
     (response) => {
       if (response && response.tabId) {
         console.log('新しいタブが作成されました。タブID:', response.tabId);
-        // 必要に応じて、タブIDを使った追加処理をここに記述
       }
     }
   );
