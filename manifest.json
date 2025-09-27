@@ -3,25 +3,28 @@
 	"name": "Zenn Easy Scrap",
 	"version": "1.0.0",
 	"description": "ZennのScrap編集画面から新規Scrapを簡単に作成できる拡張機能",
-		"icons": {
+	"icons": {
+		"16": "images/icon16.png",
+		"32": "images/icon32.png",
+		"48": "images/icon48.png",
+		"128": "images/icon128.png"
+	},
+	"action": {
+		"default_icon": {
 			"16": "images/icon16.png",
 			"32": "images/icon32.png",
 			"48": "images/icon48.png",
 			"128": "images/icon128.png"
 		},
-		"action": {
-			"default_icon": {
-				"16": "images/icon16.png",
-				"32": "images/icon32.png",
-				"48": "images/icon48.png",
-				"128": "images/icon128.png"
-			},
-			"default_title": "Zenn Easy Scrap"
-		},
-		"content_scripts": [
-			{
-				"matches": ["https://zenn.dev/*/scraps/*"],
-				"js": ["src/content.js"]
-			}
-		]
+		"default_title": "Zenn Easy Scrap"
+	},
+	"background": {
+		"service_worker": "src/background.js"
+	},
+	"content_scripts": [
+		{
+			"matches": ["https://zenn.dev/*/scraps/*"],
+			"js": ["src/content.js"]
+		}
+	]
 }
