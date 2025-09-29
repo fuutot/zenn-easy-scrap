@@ -24,12 +24,6 @@ function postToScrap(childUrl) {
         
         // テキストエリアに内容を設定
         textarea.innerText = postContent;
-        
-        // input/change イベントを発火してReactの状態を更新
-        const inputEvent = new Event('input', { bubbles: true });
-        const changeEvent = new Event('change', { bubbles: true });
-        textarea.dispatchEvent(inputEvent);
-        textarea.dispatchEvent(changeEvent);
 
         // 少し待ってから投稿ボタンをクリック
         setTimeout(() => {
