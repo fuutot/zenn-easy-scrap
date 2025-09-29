@@ -31,6 +31,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                         console.log('現在のタブのURL情報が更新されました');
                     });
                     sendResponse({ exists: true, info: currentTabInfo });
+
+                    // 親タブに子記事投稿の通知を送信
+                    chrome.tabs.sendMessage(parseInt(currentTabInfo.parentTabId), { action: 'childScrapPosted', tabId: currentTabId, url: currentTabInfo.url });
                 } else {
                     // タブ情報が存在しない場合
                     sendResponse({ exists: false });
