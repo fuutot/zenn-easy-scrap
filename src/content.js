@@ -1,6 +1,13 @@
 function handleClick() {
-  const newScrapUrl = 'https://zenn.dev/scraps/new'; // 新規Scrap作成ページのURL
-  window.open(newScrapUrl, '_blank');
+  // background.jsにメッセージを送信（新しいタブ作成を依頼）
+  chrome.runtime.sendMessage(
+    {action: 'createNewScrapTab', target: 'background'},
+    (response) => {
+      if (response && response.tabId) {
+        console.log('新しいタブが作成されました。タブID:', response.tabId);
+      }
+    }
+  );
 }
 
 // ボタン生成＆追加処理を関数化
