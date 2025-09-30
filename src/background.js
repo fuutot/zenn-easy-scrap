@@ -9,7 +9,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             sendResponse({ tabId: tab.id, success: true });
             
             // 親URLとタブIDの関連付けを保存
-            childTabId = tab.id.toString();
+            const childTabId = tab.id.toString();
             chrome.storage.session.set({[childTabId]: {'url': null, 'parentTabId': sender.tab.id.toString()}}).then(() => {
                 console.log('新しいタブの情報が保存されました');
             });
